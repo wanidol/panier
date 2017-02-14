@@ -1,0 +1,104 @@
+<<<<<<< HEAD
+=======
+{#<div id="logoArea" class="navbar">#}
+    {#<a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">#}
+        {#<span class="icon-bar"></span>#}
+        {#<span class="icon-bar"></span>#}
+        {#<span class="icon-bar"></span>#}
+    {#</a>#}
+    {#<div class="navbar-inner">#}
+        {#<a href=""><span style="color:#ff0000;"><h1>TP Silex</h1></span></a>#}
+        {#<form class="form-inline navbar-search" method="post" action="products.html" >#}
+            {#<input id="srchFld" class="srchTxt" type="text" />#}
+            {#<select class="srchTxt">#}
+                {#<option>All</option>#}
+                {#<option>GENRE </option>#}
+                {#<option>CATEGORIE </option>#}
+                {#<option>DATE DE SORTIE </option>#}
+            {#</select>#}
+            {#<button type="submit" id="submitButton" class="btn btn-primary">Rechercher</button>#}
+        {#</form>#}
+        {#<ul id="topMenu" class="nav pull-right">#}
+            {#<li class=""><a href="special_offer.html">Offres speciales</a></li>#}
+            {#<!--<li class=""><a href="normal.html">Informations</a></li>-->#}
+            {#<li class=""><a href="contact.html">Contact</a></li>#}
+            {#<li class="">#}
+                {#<a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Connexion</span></a>#}
+                {#<div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >#}
+                    {#<div class="modal-header">#}
+                        {#<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>#}
+                        {#<h3>Connexion</h3>#}
+                    {#</div>#}
+                    {#<div class="modal-body">#}
+                        {#<form class="form-horizontal loginFrm">#}
+                            {#<div class="control-group">#}
+                                {#<input type="text" id="inputEmail" placeholder="Email">#}
+                            {#</div>#}
+                            {#<div class="control-group">#}
+                                {#<input type="password" id="inputPassword" placeholder="Password">#}
+                            {#</div>#}
+                            {#<div class="control-group">#}
+                                {#<label class="checkbox">#}
+                                    {#<input type="checkbox"> Remember me#}
+                                {#</label>#}
+                            {#</div>#}
+                        {#</form>#}
+                        {#<button type="submit" class="btn btn-success">Connexion</button>#}
+                        {#<button class="btn" data-dismiss="modal" aria-hidden="true">Quitter</button>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</li>#}
+        {#</ul>#}
+    {#</div>#}
+{#</div>#}
+
+
+
+
+
+
+>>>>>>> 8727a8ddef7406a90d935687fb3b4d0415826e16
+
+<nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+      <li class="name">
+        <h1> <a href="">TP web<span style="color:#ff0000;"> menu avec twig</span></a></h1>
+      </li>
+      <li class="toggle-topbar menu-icon">
+        <a href="#"><span>Menu</span></a>
+      </li>
+    </ul>
+    <section class="top-bar-section">
+      <ul class="left">
+        <li class="divider"></li>
+        <li class="has-dropdown"><a href="#">produits</a>
+          <ul class="dropdown">
+            <li><a href="{{ path('produit.show') }}">afficher les produits</a></li>
+<<<<<<< HEAD
+            <li><a href="{{ path('produit.categories') }}">rechercher un produit </a></li>
+=======
+            <li><a href="#">rechercher un produit </a></li>
+>>>>>>> 8727a8ddef7406a90d935687fb3b4d0415826e16
+          </ul>
+        </li>
+        <li><a href="{{ path('panier.showVotrePanier') }}">panier</a>
+
+        </li>
+        <li class="has-dropdown"><a href="#">mon compte</a>
+          <ul class="dropdown">
+            <li><a href="#">mes commandes</a></li>
+            <li><a href="#">mes coordonnées</a></li>
+          </ul>
+        </li>
+      </ul>
+        <ul class="right">
+            {% if   app.session.get('logged') is defined and  app.session.get('logged') == 1 %}
+                <li class="name" style="color: #d58512">Connecté en tant que : {{ app.session.get('username') }}</li>
+                <li><a href="{{ path('user.logout')  }}">Se déconnecter</a></li>
+            {% else %}
+                <li><a href="{{ path('user.login')  }}">Se connecter</a></li>
+            {% endif %}
+        </ul>
+    </section> 
+</nav>
+

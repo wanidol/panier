@@ -1,0 +1,113 @@
+<<<<<<< HEAD
+{% extends "layout.html.twig" %}
+{% block contenu %}
+    <div class="row">
+
+        <table >
+            <caption style="font-size: larger">Recapitulatifs du panier (avec twig) User:{{ app.session.get('username') }}</caption>
+
+
+            <thead>
+
+            <tr style="align-content:center">
+                <th>Id</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+                <th>Date</th>
+                <th>Nom De Produit</th>
+                <th>Photo</th>
+                <th>Supprimer</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for panier in data if data is not empty %}
+                <tr>
+                    <td>{{panier.id}}</td>
+                    <td>{{panier.quantite}}</td>
+                    <td>EUR {{panier.prix}}</td>
+                    <td>{{panier.dateAjoutPanier|date("m/d/Y")}}</td>
+                    <td>{{panier.nom}}</td>
+                    <td><img style="width:100px;height:100px" src="{{ asset('images/')}}{{panier.photo}}"> </td>
+                    <td>
+                        <a href="{{ path('panier.delete', {id: panier.id}) }}"><img style="width:80px;height:80px" src="{{asset('images/deletePanier.jpeg')}}"></a>
+
+                    </td>
+
+                </tr>
+            {% endfor %}
+            <tbody>
+
+        </table>
+        <table>
+            <tr>
+                {% for desc in panier_total if panier_total is not empty %}
+                    <th rowspan="4">Sous-total( <b style="color: #d58512; font-size: 30px">{{ desc.qualtity }}</b> articles): <b style="color: #d58512; font-size: 30px">{{desc.total}}</b> EUR </th>
+                {% endfor %}
+                <th rowspan="4">Passer Commande </th>
+
+                <th rowspan="4"><a href="#"><img style="width:80px;height:80px" src="{{asset('images/addCommande2.jpeg')}}"></a></th>
+            </tr>
+        </table>
+        </div>
+    </div>
+{% endblock %}
+
+=======
+{% extends "layout.html.twig" %}
+{% block contenu %}
+    <div class="row">
+
+        <table >
+            <caption style="font-size: larger">Recapitulatifs du panier (avec twig) User:{{ app.session.get('username') }}</caption>
+
+
+            <thead>
+
+            <tr style="align-content:center">
+                <th>Id</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+                <th>Date</th>
+                <th>Nom De Produit</th>
+                <th>Photo</th>
+                <th>Supprimer</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for panier in data if data is not empty %}
+                <tr>
+                    <td>{{panier.id}}</td>
+                    <td>{{panier.quantite}}</td>
+                    <td>EUR {{panier.prix}}</td>
+                    <td>{{panier.dateAjoutPanier|date("m/d/Y")}}</td>
+                    <td>{{panier.nom}}</td>
+                    <td><img style="width:100px;height:100px" src="{{ asset('images/')}}{{panier.photo}}"> </td>
+                    <td>
+                        <a href="{{ path('panier.supp', {id: panier.id}) }}"><img style="width:80px;height:80px" src="{{asset('images/deletePanier.jpeg')}}"></a>
+
+                    </td>
+                    {#<td><a href="#"><img style="width:80px;height:80px" src="{{asset('images/deletePanier.jpeg')}}"></a>Mettre a Coté</td>#}
+                    {#<td><a href="#"><img style="width:80px;height:80px" src="{{asset('images/addCommande2.jpeg')}}"></a></td>#}
+
+
+                </tr>
+            {% endfor %}
+            <tbody>
+
+        </table>
+        <table>
+            <tr>
+                {% for desc in panier_total if panier_total is not empty %}
+                    <th rowspan="4">Sous-total( <b style="color: #d58512; font-size: 30px">{{ desc.qualtity }}</b> articles): <b style="color: #d58512; font-size: 30px">{{desc.total}}</b> EUR </th>
+                {% endfor %}
+                <th rowspan="4">Passer Commande </th>
+                <th rowspan="4"><a href="#"><img style="width:80px;height:80px" src="{{asset('images/addCommande2.jpeg')}}"></a></th>
+            </tr>
+        </table>
+        </div>
+    </div>
+{% endblock %}
+
+>>>>>>> 8727a8ddef7406a90d935687fb3b4d0415826e16

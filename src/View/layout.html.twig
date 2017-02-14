@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/x-icon" href="http://www.iut-bm.univ-fcomte.fr/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>exemple MVC php</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/foundation.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}" >
+    <script src="{{ asset('assets/js/vendor/modernizr.js') }}"></script>
+<<<<<<< HEAD
+    </head>
+  <body>
+=======
+
+
+    {#<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">#}
+    {#<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>#}
+    {#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
+    {#<link id="callCss" rel="stylesheet" href="{{ asset('bootstrap/themes/dvdstore/bootstrap.min.css')}}" media="screen"/>#}
+    {#<link href="{{ asset('bootstrap/themes/css/base.css')}}" rel="stylesheet" media="screen"/>#}
+    <!-- Bootstrap style responsive -->
+    {#<link href="{{ asset('bootstrap/themes/css/bootstrap-responsive.min.css')}}" rel="stylesheet"/>#}
+    {#<link href="{{ asset('bootstrap/themes/css/font-awesome.css')}}" rel="stylesheet" type="text/css">#}
+    <!-- Google-code-prettify -->
+    {#<link href="{{ asset('bootstrap/themes/js/google-code-prettify/prettify.css')}}" rel="stylesheet"/>#}
+    <!-- fav and touch icons -->
+    {#<link rel="shortcut icon" href="{{ asset('bootstrap/themes/images/ico/icon.png')}}">#}
+  </head>
+  <body>
+  {#<div id="header">#}
+    {#<div class="container">#}
+      {#<div id="welcomeLine" class="row">#}
+        {#<div class="span6">Welcome!<strong> User</strong></div>#}
+        {#<div class="span6">#}
+          {#<div class="pull-right">#}
+            {#<a href="product_summary.html"><span class="">Fr</span></a>#}
+            {#<a href="product_summary.html"><span class="">Es</span></a>#}
+            {#<span class="btn btn-mini">En</span>#}
+            {#<a href="product_summary.html"><span>&pound;</span></a>#}
+            {#<span class="btn btn-mini">$155.00</span>#}
+            {#<a href="product_summary.html"><span class="">$</span></a>#}
+            {#<a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i>#}
+		{#[ 3 ] Itemes in your cart </span> </a>#}
+          {#</div>#}
+        {#</div>#}
+      {#</div>#}
+>>>>>>> 8727a8ddef7406a90d935687fb3b4d0415826e16
+
+{% if   app.session.get('roles') is defined and  app.session.get('roles') == 'ROLE_ADMIN' %}
+  {% include "nav_backOff.html.twig" %}
+{% elseif   app.session.get('roles') is defined and  app.session.get('roles') == 'ROLE_CLIENT' %}
+  {% include "nav_frontOff.html.twig" %}
+{% else %}
+  {% include "nav_home.html.twig" %}
+{% endif%}
+
+{% block contenu %}
+    Site de vente projet S3 web IUT
+{% endblock %}
+
+<script src="{{ asset('assets/js/vendor/jquery.js') }}"></script>
+<script src="{{ asset('assets/js/foundation.min.js') }}"></script>
+<script>
+  $(document).foundation();
+</script>
+  </body>
+</html>
+

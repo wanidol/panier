@@ -1,0 +1,89 @@
+<<<<<<< HEAD
+{% extends "layout.html.twig" %}
+{% block contenu %}
+    <div class="row">
+
+        <table>
+            <caption>Recapitulatifs du panier (avec twig)</caption>
+            <thead>
+
+            <tr>
+                <th>id</th>
+                <th>quantite</th>
+                <th>prix</th>
+                <th>dateAjoutPanier</th>
+                <th>Nom de produit</th>
+                <th>Photo</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for panier in data if data is not empty %}
+                <tr>
+                    <td>{{panier.id}}</td>
+                    <td>{{panier.quantite}}</td>
+                    <td>{{panier.prix}}</td>
+                    <td>{{panier.dateAjoutPanier}}</td>
+                    <td>{{panier.nom}}</td>
+                    <td><img style="width:100px;height:100px" src="{{ asset('images/')}}{{panier.photo}}"> </td>
+                    <td>
+                        <a href="{{ path('panier.supp', {id: panier.id}) }}"><img style="width:80px;height:80px" src="{{asset('images/deletePanier.jpeg')}}"></a>
+
+                    </td>
+                    {#<td><a href="#"><img style="width:80px;height:80px" src="{{asset('images/deletePanier.jpeg')}}"></a>Mettre a Coté</td>#}
+                    <td><a href="#"><img style="width:80px;height:80px" src="{{asset('images/addCommande2.jpeg')}}"></a></td>
+
+
+                </tr>
+            {% endfor %}
+            <tbody>
+        </table>
+    </div>
+{% endblock %}
+
+=======
+{% extends "layout.html.twig" %}
+{% block contenu %}
+    <div class="row">
+
+        <table>
+            <caption>Recapitulatifs du panier (avec twig)</caption>
+            <thead>
+
+            <tr>
+                <th>id</th>
+                <th>quantite</th>
+                <th>prix</th>
+                <th>dateAjoutPanier</th>
+                <th>Nom de produit</th>
+                <th>Photo</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for panier in data if data is not empty %}
+                <tr>
+                    <td>{{panier.id}}</td>
+                    <td>{{panier.quantite}}</td>
+                    <td>{{panier.prix}}</td>
+                    <td>{{panier.dateAjoutPanier}}</td>
+                    <td>{{panier.nom}}</td>
+                    <td><img style="width:100px;height:100px" src="{{ asset('images/')}}{{panier.photo}}"> </td>
+                    <td>
+                        <a href="{{ path('panier.supp', {id: panier.id}) }}"><img style="width:80px;height:80px" src="{{asset('images/deletePanier.jpeg')}}"></a>
+
+                    </td>
+                    {#<td><a href="#"><img style="width:80px;height:80px" src="{{asset('images/deletePanier.jpeg')}}"></a>Mettre a Coté</td>#}
+                    <td><a href="#"><img style="width:80px;height:80px" src="{{asset('images/addCommande2.jpeg')}}"></a></td>
+
+
+                </tr>
+            {% endfor %}
+            <tbody>
+        </table>
+    </div>
+{% endblock %}
+
+>>>>>>> 8727a8ddef7406a90d935687fb3b4d0415826e16

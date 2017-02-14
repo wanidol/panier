@@ -1,0 +1,63 @@
+<<<<<<< HEAD
+{% extends "layout.html.twig" %}
+{% block contenu %}
+
+    <form method="post" action="{{ path('user.validFormRegister') }}">
+
+        <div class="row">
+
+            <fieldset>
+                <legend>Registration</legend>
+
+                <label>UserName :
+                    <input name="username"  type="text"  size="18" value="" placeholder="silex" required/>
+                </label>
+
+                <label>Password :
+                    <input name="motdepasse"  type="password"  size="18" value="" placeholder="xxxxxxx" required/>
+                </label>
+
+                <label>Comfirm Password :
+                    <input name="confirmpassword"  type="password"  size="18" value="" placeholder="xxxxxxx" required/>
+                </label>
+
+                <label>Email :
+                    <input name="email"  type="email"  size="18" value="" placeholder="monsilex@silex.com" required/>
+                </label>
+
+                {% if app.session.get('erreur') is not empty %}
+                    <small class="error">{{ app.session.get('erreur') }}</small>
+                {% endif %}
+
+                <input type="submit" name="seRegister" value="Se Registrer" />
+            </fieldset>
+        </div>
+    </form>
+{% endblock %}
+=======
+{% extends "layout.html.twig" %}
+{% block contenu %}
+    {#<form method="post" action="{{ path('user.validFormlogin') }}">#}
+
+        {#<div class="row">#}
+
+            {#<fieldset>#}
+                {#<legend>Se connecter  (avec twig)</legend>#}
+                {#<label>Login :#}
+                    {#<input name="login"  type="text"  size="18" value="" />#}
+                {#</label>#}
+
+                {#<label>Password :#}
+                    {#<input name="password"  type="text"  size="18" value="" />#}
+                {#</label>#}
+                {#{% if app.session.get('erreur') is not empty %}#}
+                    {#<small class="error">{{ app.session.get('erreur') }}</small>#}
+                {#{% endif %}#}
+
+                {#<input type="submit" name="seConnecter" value="Se connecter" />#}
+            {#</fieldset>#}
+        {#</div>#}
+    {#</form>#}
+register
+{% endblock %}
+>>>>>>> 8727a8ddef7406a90d935687fb3b4d0415826e16

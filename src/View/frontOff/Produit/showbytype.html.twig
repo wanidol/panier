@@ -1,0 +1,31 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+    <div class="row">
+        <fieldset>
+            <form method="post" action="{{ path('produit.categoriesDetail') }}">
+                <legend>Rechercher un produit par categories</legend>
+
+                <label style="font-size: larger">Categories :
+
+                    <select name="typeProduit_id">
+                        {% if  donnees.typeProduit_id is not defined or donnees.typeProduit_id is empty   %}
+                            <option value="">Veuillez sélectionner un produit</option>
+                        {% endif %}
+                        {% for typeProduit in typeProduits %}
+                            <option value="{{ typeProduit.id }}"
+                                    {% if donnees.typeProduit_id is defined and typeProduit.id == donnees.typeProduit_id %}selected{% endif %}>
+                                {{ typeProduit.libelle }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    {% if erreurs.typeProduit_id is defined %}
+                        <small class="error">{{erreurs.typeProduit_id}}</small>
+                    {% endif %}
+                </label>
+
+                    <input type="image" name="submit" src="{{asset('images/loupe.png')}}" border="0" alt="Submit" placeholder="Click me"  />
+            </form>
+        </fieldset>
+    </div>
+{% endblock %}
+
