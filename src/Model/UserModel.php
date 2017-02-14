@@ -20,7 +20,7 @@ class UserModel {
 		else
 			return false;
 	}
-<<<<<<< HEAD
+
 
 
     public function addUser($donnees)
@@ -42,16 +42,8 @@ class UserModel {
 
         return $queryBuilder->execute();
     }
-=======
-	// public function verif_login_mdp_Utilisateur($login,$mdp){
-	// 	$sql = "SELECT id,login,password,droit FROM users WHERE login = ? AND password = ?";
-	// 	$res=$this->db->executeQuery($sql,[$login,$mdp]);   //md5($mdp);
-	// 	if($res->rowCount()==1)
-	// 		return $res->fetch();
-	// 	else
-	// 		return false;
-	// }
->>>>>>> 8727a8ddef7406a90d935687fb3b4d0415826e16
+
+
 
 	public function getUser($user_id) {
 		$queryBuilder = new QueryBuilder($this->db);

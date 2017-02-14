@@ -36,17 +36,12 @@ class ProduitController implements ControllerProviderInterface
         return $app["twig"]->render('backOff/Produit/show.html.twig',['data'=>$produits]);
     }
 
-<<<<<<< HEAD
-      public function detail(Application $app ,$id) {
-=======
-//    public function showForCustomer(Application $app) {
-//        $this->produitModel = new ProduitModel($app);
-//        $produits = $this->produitModel->getAllProduits();
-//        return $app["twig"]->render('backOff/Produit/show.html.twig',['data'=>$produits]);
-//    }
+
+
+
 
     public function detail(Application $app ,$id) {
->>>>>>> 8727a8ddef7406a90d935687fb3b4d0415826e16
+
         $this->typeProduitModel = new TypeProduitModel($app);
         $typeProduits = $this->typeProduitModel->getAllTypeProduits();
         $this->produitModel = new ProduitModel($app);
@@ -55,20 +50,17 @@ class ProduitController implements ControllerProviderInterface
         return $app["twig"]->render('frontOff/Produit/detail.html.twig',['typeProduits'=>$typeProduits,'donnees'=>$donnees]);
     }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 8727a8ddef7406a90d935687fb3b4d0415826e16
+
+
     public function add(Application $app) {
         $this->typeProduitModel = new TypeProduitModel($app);
         $typeProduits = $this->typeProduitModel->getAllTypeProduits();
         return $app["twig"]->render('backOff/Produit/add.html.twig',['typeProduits'=>$typeProduits]);
     }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 8727a8ddef7406a90d935687fb3b4d0415826e16
+
     public function validFormAdd(Application $app, Request $req) {
        // var_dump($app['request']->attributes);
         if (isset($_POST['nom']) && isset($_POST['typeProduit_id']) and isset($_POST['nom']) and isset($_POST['photo'])) {
@@ -196,7 +188,7 @@ class ProduitController implements ControllerProviderInterface
 
     }
 
-<<<<<<< HEAD
+
     public function showCategories(Application $app){
         $this->typeProduitModel = new TypeProduitModel($app);
         $typeProduits = $this->typeProduitModel->getAllTypeProduits();
@@ -214,8 +206,6 @@ class ProduitController implements ControllerProviderInterface
     }
 
 
-=======
->>>>>>> 8727a8ddef7406a90d935687fb3b4d0415826e16
     public function connect(Application $app) {  //http://silex.sensiolabs.org/doc/providers.html#controller-providers
         $controllers = $app['controllers_factory'];
 
@@ -233,7 +223,7 @@ class ProduitController implements ControllerProviderInterface
 
         $controllers->get('/detail/{id}', 'App\Controller\produitController::detail')->bind('produit.detail')->assert('id', '\d+');
 
-<<<<<<< HEAD
+
         $controllers->get('/categories', 'App\Controller\produitController::showCategories')->bind('produit.categories');
 
         $controllers->post('/categories', 'App\Controller\produitController::showbyCategories')->bind('produit.categoriesDetail');
@@ -242,8 +232,6 @@ class ProduitController implements ControllerProviderInterface
         return $controllers;
     }
 
-=======
-        return $controllers;
-    }
->>>>>>> 8727a8ddef7406a90d935687fb3b4d0415826e16
+
+
 }

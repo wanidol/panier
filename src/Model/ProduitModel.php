@@ -46,7 +46,7 @@ class ProduitModel {
         return $queryBuilder->execute();
     }
 
-<<<<<<< HEAD
+
     function getProduitsByCategories($id){
 
         $queryBuilder = new QueryBuilder($this->db);
@@ -60,8 +60,8 @@ class ProduitModel {
         return $queryBuilder->execute()->fetchAll();
     }
 
-=======
->>>>>>> 8727a8ddef7406a90d935687fb3b4d0415826e16
+
+
     function getDetail($id) {
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder

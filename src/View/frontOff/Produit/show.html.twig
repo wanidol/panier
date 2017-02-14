@@ -1,21 +1,17 @@
 {% extends "layout.html.twig" %}
 {% block contenu %}
 	<div class="row">
-<<<<<<< HEAD
-        {% if   app.session.get('droit') is defined and  app.session.get('droit') == 'DROITadmin' %}
-			<a href="{{ path('produit.add') }}"> Ajouter un produit </a>
-        {% endif %}
-=======
-        {#{% if   app.session.get('droit') is defined and  app.session.get('droit') == 'DROITadmin' %}#}
+
+       {#{% if   app.session.get('droit') is defined and  app.session.get('droit') == 'DROITadmin' %}#}
 			{#<a href="{{ path('produit.add') }}"> Ajouter un produit </a>#}
         {#{% endif %}#}
->>>>>>> 8727a8ddef7406a90d935687fb3b4d0415826e16
+
 
 		<table>
 			<caption>Recapitulatifs des produits (avec twig)</caption>
 			<thead>
 			<tr>
-<<<<<<< HEAD
+
 				<th>NOM</th>
                 <th>ID</th>
 				<th>Type</th>
@@ -27,18 +23,7 @@
                 {% if  app.session.get('roles') == 'ROLE_ADMIN' %}
 					<th>opération</th>
                 {% endif %}
-=======
-				<th>nom</th>
-				{#<th>id</th>#}
-				<th>type</th>
-				<th>prix</th>
-				<th>nom photo</th>
-				<th>photo</th>
-				<th>Details</th>
-                {#{% if  app.session.get('roles') == 'ROLE_ADMIN' %}#}
-					{#<th>opération</th>#}
-                {#{% endif %}#}
->>>>>>> 8727a8ddef7406a90d935687fb3b4d0415826e16
+
 			</tr>
 			</thead>
 			<tbody>
@@ -46,7 +31,7 @@
             {% for produit in data if data is not empty %}
 
 				<tr>
-<<<<<<< HEAD
+
 					<td>{{produit.nom}}</td>
                     <td>{{produit.id}}</td>
 					<td>{{produit.libelle}}</td>
@@ -67,11 +52,8 @@
                     {#{% endif %}#}
 
                     {#<td><a href="{{ path('produit.detail', {id: produit.id}) }}"><img style="width:80px;height:80px" src="{{asset('images/ajoutPanier.jpeg')}}"></a></td>#}
-=======
-					<td>{{produit.nom}}</td><td>{{produit.id}}</td><td>{{produit.libelle}}</td><td>{{produit.prix}}</td><td>
-                        {{produit.photo}}</td><td>
-						<img style="width:40px;height:40px" src="{{asset('images/')}}{{produit.photo}}" alt="image de {{produit.libelle}}" >
-					</td>
+
+
 
                     {#{% if  app.session.get('roles') == 'ROLE_ADMIN' %}#}
 						{#<td>#}
@@ -80,8 +62,7 @@
 						{#</td>#}
                     {#{% endif %}#}
 
-					<td><a href="{{ path('produit.detail', {id: produit.id}) }}"><img style="width:80px;height:80px" src="{{asset('images/ajoutPanier.jpeg')}}"></a></td>
->>>>>>> 8727a8ddef7406a90d935687fb3b4d0415826e16
+
 
 				</tr>
             {% endfor %}

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {% extends "layout.html.twig" %}
 {% block contenu %}
 
@@ -37,43 +36,4 @@
     {#</form>#}
 {% endblock %}
 
-=======
-{% extends "layout.html.twig" %}
-{% block contenu %}
 
-    <div class="row" xmlns="http://www.w3.org/1999/html">
-          <table  style="width:100%;border: none;">
-              <form method="post" action="{{ path('panier.validFormAdd') }}">
-
-                  <input name="produit_id" type="hidden" value="{{ donnees.id }}">
-                  <input name="user_id" type="hidden" value="{{ app.session.get('user_id') }}">
-
-
-
-                <caption><h2>Product Details</h2></caption>
-                <thead>
-
-                </thead>
-                <tbody>
-
-                    <tr>
-                        <th rowspan="4"><img  src="{{asset('images/')}}{{donnees.photo}}"  ></th>
-                        <td colspan="4"><h3>{{donnees.nom}}</h3></td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-
-                        <td><h1>EUR {{donnees.prix}}</h1><input type="hidden" name ="prix" value="{{ donnees.prix }}"/></td>
-                        <td><input type="image" src="{{asset('images/ajoutPanier.jpeg')}}"style="width:100px;height:100px;border:outset;border-radius: 25px;" alt="Submit"/> </td>
-                    </tr>
-
-               </tbody>
-            </form>
-            </table>
-
-
-        </div>
-    {#</form>#}
-{% endblock %}
-
->>>>>>> 8727a8ddef7406a90d935687fb3b4d0415826e16
