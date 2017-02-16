@@ -26,6 +26,12 @@ class UserController implements ControllerProviderInterface {
 		return $app["twig"]->render('login.html.twig');
 	}
 
+    public function show(Application $app)
+    {
+        $this->usermodel = new UserModel($app);
+        $users = $this->usermodel->show();
+        return $app["twig"]->render('backOff\showuser.html.twig',['data'=>$users]);
+    }
 
 	public function registerUser(Application $app)
     {
@@ -120,6 +126,9 @@ class UserController implements ControllerProviderInterface {
 
         $controllers->post('/register', 'App\Controller\UserController::validFormRegisterUser')->bind('user.validFormRegister');
         $controllers->get('/register', 'App\Controller\UserController::registerUser')->bind('user.register');
+
+        $controllers->get('/show', 'App\Controller\UserController::show')->bind('user.show');
+
 		return $controllers;
 	}
 }

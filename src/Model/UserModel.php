@@ -12,6 +12,17 @@ class UserModel {
 		$this->db = $app['db'];
 	}
 
+    public function show(){
+
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('id', 'username', 'motdepasse', 'roles', 'email','isEnabled')
+            ->from('users')
+            ->addOrderBy('id', 'ASC');
+        return $queryBuilder->execute()->fetchAll();
+
+    }
+
 	public function verif_login_mdp_Utilisateur($login,$mdp){
 		$sql = "SELECT id,username,motdepasse,roles FROM users WHERE username = ? AND motdepasse = ?";
 		$res=$this->db->executeQuery($sql,[$login,$mdp]);   //md5($mdp);

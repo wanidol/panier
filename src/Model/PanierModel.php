@@ -13,6 +13,20 @@ class PanierModel {
         $this->db = $app['db'];
     }
 
+    //temp
+//    public function getAllCommand() {
+//
+//        $queryBuilder = new QueryBuilder($this->db);
+//        $queryBuilder
+//            ->select('co.id','co.user_id','co.prix', 'co.date_achat', 'co.etat_id')
+//            ->from('commandes', 'co')
+//            ->addOrderBy('co.id', 'ASC');
+//        var_dump($queryBuilder->execute()->fetchAll());die();
+//        return $queryBuilder->execute()->fetchAll();
+//
+//    }
+
+
     public function getAllPanier() {
 
         $queryBuilder = new QueryBuilder($this->db);
@@ -25,21 +39,20 @@ class PanierModel {
 
     }
 
+
     public function getPanierByUser($id){
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
-            ->select('pa.id','pa.quantite','pa.prix', 'pa.dateAjoutPanier', 'pa.user_id', 'p.nom','p.photo')
+            ->select('pa.id','pa.quantite','pa.prix', 'pa.dateAjoutPanier', 'pa.user_id', 'p.nom','p.photo','pa.produit_id')
             ->from('paniers','pa')
             ->innerJoin('pa','produits','p','pa.produit_id = p.id')
             ->where('pa.commande_id IS NULL ')
             ->andWhere('pa.user_id= :id')
             ->setParameter('id', $id)
             ->addOrderBy('pa.id', 'ASC');
-//        print_r($queryBuilder);
-//        var_dump($queryBuilder);
+
         $result = $queryBuilder->execute()->fetchAll();
-//        return $queryBuilder->execute()->fetchAll();
-//        print_r($result);
+
         return $result;
     }
 
@@ -50,11 +63,41 @@ class PanierModel {
             ->select('SUM(pa.prix) as total','Count(pa.id) as qualtity')
             ->from('paniers','pa')
             ->where('pa.user_id= :id')
+            ->andWhere('pa.commande_id IS NULL')
             ->setParameter('id', $id)
             ->addOrderBy('pa.id', 'ASC');
 //        var_dump($queryBuilder);
         return $queryBuilder->execute()->fetchAll();
 
+    }
+    public function GetSumPrix($id){
+
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('SUM(pa.prix)')
+            ->from('paniers','pa')
+            ->where('pa.user_id= :id')
+            ->andWhere('pa.commande_id IS NULL')
+            ->setParameter('id', $id);
+
+//        var_dump($queryBuilder);
+        return $queryBuilder->execute()->fetch();
+
+    }
+
+    public function updateCommandePanier($id,$user_id) {
+
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->update('paniers')
+            ->set('commande_id', '?')
+//            ->innerJoin('pa')
+            ->where('user_id= ?')
+//            ->andWhere('user_id=?')
+            ->setParameter(0, (int)$id)
+            ->setParameter(1, (int)$user_id);
+
+        return $queryBuilder->execute();
     }
 
     public function updatePanier($checkPanier) {
@@ -64,12 +107,10 @@ class PanierModel {
             ->set('quantite', '?')
             ->set('prix','?')
             ->where('id= ?')
-//            ->andWhere('user_id=?')
             ->setParameter(0, $checkPanier['quantite']+1)
             ->setParameter(1, $checkPanier['prix']+ $checkPanier['prix'])
             ->setParameter(2, $checkPanier['id']);
-//            ->setParameter(3, $checkPanier['user_id']);
-//        var_dump($queryBuilder);
+
         return $queryBuilder->execute();
     }
 
@@ -77,9 +118,7 @@ class PanierModel {
         $queryBuilder = new QueryBuilder($this->db);
         $date = date('Y-m-d');
 
-
         $queryBuilder->insert('paniers')
-
             ->values([
                 'quantite' => '?',
                 'prix' => '?',
@@ -88,9 +127,7 @@ class PanierModel {
                 'produit_id' => '?',
                 'commande_id' => '?'
 
-
             ])
-
             ->setParameter(0, 1)
             ->setParameter(1, $donnees['prix'])
             ->setParameter(2, $date)
@@ -109,13 +146,11 @@ class PanierModel {
             ->from('paniers', 'p')
             ->where('p.produit_id= :id')
             ->andWhere('p.user_id= :user')
+            ->andWhere('p.commande_id IS NULL')
             ->setParameter('id', $id)
             ->setParameter('user',$user_id);
-//        var_dump($queryBuilder);
-
 
         $result = $queryBuilder->execute()->fetch();
-//        return $queryBuilder->execute()->fetchAll();
         print_r($result);
         return $result;
 

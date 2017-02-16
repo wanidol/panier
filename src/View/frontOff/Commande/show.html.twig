@@ -1,0 +1,33 @@
+
+{% extends "layout.html.twig" %}
+{% block contenu %}
+    <div class="row">
+
+        <table>
+            <caption>Recapitulatifs Du Votre Commande (avec twig)</caption>
+            <thead>
+
+            <tr>
+                <th>CommandeId</th>
+                <th>Total</th>
+                <th>Date Achat</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for commande in data if data is not empty %}
+                <tr>
+                    <td>{{commande.id}}</td>
+                    <td>EUR {{commande.prix}}</td>
+                    <td>{{commande.date_achat}}</td>
+                    <td>{{commande.libelle}}</td>
+                </tr>
+            {% endfor %}
+            <tbody>
+        </table>
+    </div>
+{% endblock %}
+
+
+

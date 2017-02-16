@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Model\ProduitModel;
+use App\Model\CommandModel;
 use App\Model\TypeProduitModel;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;   // modif version 2.0
@@ -91,6 +92,26 @@ class PanierController implements ControllerProviderInterface
         return $app->redirect($app["url_generator"]->generate("panier.showVotrePanier"));
  }
 
+//    public function showByUser(Application $app) {
+//        $user_id = $app['session']->get('user_id');
+//        $this->commandeModel = new CommandModel($app);
+//        $commandeModel = $this->commandeModel->getCommandByUser($user_id);
+////var_dump($commandeModel);die();
+//        return $app["twig"]->render('backOff/Commande/show.html.twig',['data'=>$commandeModel]);
+//
+//    }
+//
+//    public function Adminshow(Application $app) {
+//
+//        $this->panierModel = new CommandModel($app);
+//
+////        $this->commandeModel = new CommandModel($app);
+//
+//        $commandeModel = $this->panierModel->getAllCommand();
+////        var_dump($commandeModel);die();
+//        return $app["twig"]->render('backOff/Commande/show.html.twig',['data'=>$commandeModel]);
+//    }
+
     public function connect(Application $app) {
 
         $controllers = $app['controllers_factory'];
@@ -107,6 +128,8 @@ class PanierController implements ControllerProviderInterface
 
         $controllers->get('/detailByUser', 'App\Controller\panierController::showVotrePanier')->bind('panier.showVotrePanier');
 
+//        $controllers->get('/showCommande', 'App\Controller\panierController::showByUser')->bind('commande.myshow');
+//        $controllers->get('/showCommande', 'App\Controller\panierController::Adminshow')->bind('commande.adminshow');
 
         return $controllers;
     }

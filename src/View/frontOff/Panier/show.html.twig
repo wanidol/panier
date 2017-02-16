@@ -4,9 +4,8 @@
     <div class="row">
 
         <table >
+
             <caption style="font-size: larger">Recapitulatifs du panier (avec twig) User:{{ app.session.get('username') }}</caption>
-
-
             <thead>
 
             <tr style="align-content:center">
@@ -46,7 +45,12 @@
                 {% endfor %}
                 <th rowspan="4">Passer Commande </th>
 
-                <th rowspan="4"><a href="#"><img style="width:80px;height:80px" src="{{asset('images/addCommande2.jpeg')}}"></a></th>
+                {#<form method="post" action="{{ path('commande.add') }}">#}
+                    {#<th rowspan="4">input type="image" name="submit" src="{{asset('images/addCommande2.jpeg')}}" border="0" alt="Submit" placeholder="Click me" /></th>#}
+                    <th rowspan="4"><a href="{{path('commande.add')}}"><img style="width:80px;height:80px" src="{{asset('images/addCommande2.jpeg')}}"></a></th>
+                {#</form>#}
+
+                {#<th rowspan="4"><a href="{{path('commande.add')}}"><img style="width:80px;height:80px" src="{{asset('images/addCommande2.jpeg')}}"></a></th>#}
             </tr>
         </table>
         </div>
