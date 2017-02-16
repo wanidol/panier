@@ -41,7 +41,6 @@ class PanierController implements ControllerProviderInterface
 
         $this->panierModel = new PanierModel($app);
         $client_id =$app['session']->get('user_id');
-//        var_dump($client_id);
         $panier_total = $this->panierModel->GetTotal($client_id);
         $panier = $this->panierModel->getPanierByUser($client_id);
         return $app["twig"]->render('frontOff/Panier/show.html.twig',['data'=>$panier,'panier_total'=>$panier_total]);
@@ -52,7 +51,7 @@ class PanierController implements ControllerProviderInterface
         $this->panierModel = new PanierModel($app);
         $panierModel = $this->panierModel->deletePanier($id);
         return $app->redirect($app["url_generator"]->generate("panier.showVotrePanier"));
-//        return $app["twig"]->render('frontOff/Panier/delete.html.twig');
+
     }
 
     public function detail(Application $app ,$id) {
@@ -68,7 +67,6 @@ class PanierController implements ControllerProviderInterface
     public function validFormAdd(Application $app, Request $req) {
         $this->panierModel = new PanierModel($app);
         $this->produitModel = new ProduitModel($app);
-//        $this->panierModel = new PanierModel($app);
 
         $produit_id = $app->escape($req->get('produit_id'));
         $client_id =$app['session']->get('user_id');

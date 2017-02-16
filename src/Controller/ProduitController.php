@@ -198,11 +198,9 @@ class ProduitController implements ControllerProviderInterface
     public function showbyCategories(Application $app,Request $req) {
 
             $typeProduit_id = htmlspecialchars($req->get('typeProduit_id'));
-//            var_dump($typeProduit_id);
             $this->produitModel = new ProduitModel($app);
             $produits = $this->produitModel->getProduitsByCategories($typeProduit_id);
             return $app["twig"]->render('frontOff/Produit/show.html.twig',['data'=>$produits]);
-
     }
 
 

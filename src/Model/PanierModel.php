@@ -74,7 +74,7 @@ class PanierModel {
 
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
-            ->select('SUM(pa.prix)')
+            ->select('SUM(pa.prix) as total')
             ->from('paniers','pa')
             ->where('pa.user_id= :id')
             ->andWhere('pa.commande_id IS NULL')

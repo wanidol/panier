@@ -13,7 +13,6 @@ class TypeProduitModel {
         $this->db = $app['db'];
     }
 
-
     public function getAllTypeProduits() {
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder

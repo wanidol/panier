@@ -20,7 +20,6 @@ class CommandModel {
             ->select('co.id','co.user_id','co.prix', 'co.date_achat', 'co.etat_id')
             ->from('commandes', 'co')
             ->addOrderBy('co.id', 'ASC');
-//        var_dump($queryBuilder->execute()->fetchAll());die();
         return $queryBuilder->execute()->fetchAll();
 
     }
@@ -35,7 +34,6 @@ class CommandModel {
             ->where('co.user_id= :id')
             ->setParameter('id',$id)
             ->addOrderBy('co.id', 'ASC');
-//        var_dump($queryBuilder->execute()->fetchAll());die();
         return $queryBuilder->execute()->fetchAll();
 
     }
@@ -43,25 +41,20 @@ class CommandModel {
     public function insertCommand($id,$total) {
         $date = date('Y-m-d');
         $etat_id=1;
-
         $queryBuilder = new QueryBuilder($this->db);
-
-             $queryBuilder
-                ->insert('commandes')
-                ->values([
+        $queryBuilder
+            ->insert('commandes')
+            ->values([
                     'user_id' => '?',
                     'prix' => '?',
                     'date_achat' => '?',
                     'etat_id' => '?'
                 ])
                  ->setParameter(0, $id)
-                 ->setParameter(1, (float)$total)
+                 ->setParameter(1, $total)
                  ->setParameter(2, $date)
                  ->setParameter(3, $etat_id);
 
-
         return $queryBuilder->execute();
-
     }
-
 }

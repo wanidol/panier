@@ -26,5 +26,4 @@ class IndexController implements ControllerProviderInterface
         return $index;
     }
 
-
 }
