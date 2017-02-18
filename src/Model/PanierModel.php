@@ -56,6 +56,23 @@ class PanierModel {
         return $result;
     }
 
+
+    public function getPanierById($id){
+//        var_export($id);die();
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('pa.id','pa.quantite','pa.prix', 'pa.dateAjoutPanier', 'pa.user_id', 'p.nom','p.photo','pa.produit_id')
+            ->from('paniers','pa')
+            ->innerJoin('pa','produits','p','pa.produit_id = p.id')
+            ->where('pa.commande_id = :id')
+            ->setParameter('id', $id)
+            ->addOrderBy('pa.id', 'ASC');
+
+        $result = $queryBuilder->execute()->fetchAll();
+//        var_dump($result);die();
+        return $result;
+    }
+
     public function GetTotal($id){
 
         $queryBuilder = new QueryBuilder($this->db);
@@ -93,7 +110,7 @@ class PanierModel {
             ->set('commande_id', '?')
 //            ->innerJoin('pa')
             ->where('user_id= ?')
-//            ->andWhere('user_id=?')
+            ->andWhere('commande_id IS NULL')
             ->setParameter(0, (int)$id)
             ->setParameter(1, (int)$user_id);
 

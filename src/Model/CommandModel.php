@@ -17,9 +17,12 @@ class CommandModel {
 
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
-            ->select('co.id','co.user_id','co.prix', 'co.date_achat', 'co.etat_id')
+            ->select('co.id','co.user_id','co.prix', 'co.date_achat', 'e.libelle','u.username')
             ->from('commandes', 'co')
+            ->innerJoin('co', 'etats', 'e', 'co.etat_id=e.id')
+            ->innerJoin('co', 'users', 'u', 'co.user_id=u.id')
             ->addOrderBy('co.id', 'ASC');
+//        var_dump($queryBuilder->execute()->fetchAll());die();
         return $queryBuilder->execute()->fetchAll();
 
     }
@@ -34,6 +37,7 @@ class CommandModel {
             ->where('co.user_id= :id')
             ->setParameter('id',$id)
             ->addOrderBy('co.id', 'ASC');
+//        var_dump($queryBuilder->execute()->fetchAll());die();
         return $queryBuilder->execute()->fetchAll();
 
     }
@@ -54,6 +58,31 @@ class CommandModel {
                  ->setParameter(1, $total)
                  ->setParameter(2, $date)
                  ->setParameter(3, $etat_id);
+
+        return $queryBuilder->execute();
+    }
+
+    function getDetail($id) {
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('co.id','co.user_id','co.prix', 'co.date_achat', 'e.libelle','u.username','co.etat_id')
+            ->from('commandes', 'co')
+            ->innerJoin('co', 'etats', 'e', 'co.etat_id=e.id')
+            ->innerJoin('co', 'users', 'u', 'co.user_id=u.id')
+            ->where('co.id= :id')
+            ->setParameter('id', $id);
+        return $queryBuilder->execute()->fetch();
+    }
+
+    public function update($donnees) {
+
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->update('commandes')
+            ->set('etat_id', '?')
+            ->where('id= ?')
+            ->setParameter(0, (int)$donnees['etat_id'])
+            ->setParameter(1, (int)$donnees['commande_id']);
 
         return $queryBuilder->execute();
     }

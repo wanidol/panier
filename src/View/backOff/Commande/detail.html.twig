@@ -1,0 +1,70 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+
+    {#<form method="post" action="{{ path('panier.validFormAdd) }}">#}
+    <div class="row" xmlns="http://www.w3.org/1999/html">
+
+        <form method="post" action="{{ path('commande.update') }}">t
+            <input type="hidden" name="commande_id" value="{{ commandes.id }}">
+
+        <table  style="width:100%;border: groove;">
+            <caption>Détails de la commande</caption>
+                <tr>
+                    <th>CommandeId</th>
+                    <td>{{commandes.id}}</td>
+                </tr>
+                <tr>
+                    <th>UserId</th>
+                    <td>{{commandes.user_id}}</td>
+                </tr>
+
+                <tr>
+                    <th>Username</th>
+                    <td>{{commandes.username}}</td>
+                </tr>
+                <tr>
+                    <th>Prix</th>
+                    <td>EUR{{commandes.prix}}</td>
+                </tr>
+                <tr>
+                    <th>Date Achat</th>
+                    <td>{{commandes.date_achat}}</td>
+                </tr>
+            <tr>
+
+                <th>Status</th>
+                <td>
+                        <select style="background-color: #5bc0de" name="etats_id"  >
+                            {% if  commandes.etat_id is not defined or commandes.etat_id is empty   %}
+                                <option value="">Veuillez sélectionner un etats</option>
+                            {% endif %}
+                            {% for etat in etats %}
+                            <option value="{{ etat.id }}"
+                                    {% if commandes.etat_id is defined and etat.id == commandes.etat_id  %}selected{% endif %}>
+                                    {{etat.libelle}}
+                                {% endfor %}
+                            </option>
+                        </select>
+
+                </td>
+                <td>
+                    <input type="image" src="{{asset('images/edit.png')}}"style="width:80px;height:80px;border:outset;border-radius: 25px;" alt="Submit"/>
+
+                </td>
+            </tr>
+
+        </table>
+    {% for panier in paniers if paniers is not empty %}
+        <table>
+            {#{% for panier in paniers if paniers is not empty %}#}
+                <tr>
+                    <th rowspan="4"><img  style="width:100px;height:120px" src="{{asset('images/')}}{{panier.photo}}"  ></th>
+                    <td colspan="4"><h3>{{panier.nom}}</h3></td>
+                </tr>
+            {#{% endfor %}#}
+        </table>
+    {% endfor %}
+        </form>
+    </div>
+
+{% endblock %}

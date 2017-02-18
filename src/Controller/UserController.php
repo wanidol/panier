@@ -62,6 +62,7 @@ class UserController implements ControllerProviderInterface {
 
         if(! empty($erreurs))
         {
+//          $erreurs['register']='L\'enregistrement ne réussit pas';
             return $app["twig"]->render('register.html.twig',['donnees'=>$donnees,'erreurs'=>$erreurs]);
         }else{
 
@@ -78,7 +79,8 @@ class UserController implements ControllerProviderInterface {
             }
             else
             {
-                $app['session']->set('erreur','L\'enregistrement ne réussit pas');
+                $erreurs['register']='L\'enregistrement ne réussit pas';
+//                $app['session']->set('erreur','L\'enregistrement ne réussit pas');
                 return $app["twig"]->render('register.html.twig');
             }
 
@@ -117,6 +119,15 @@ class UserController implements ControllerProviderInterface {
 		return $app->redirect($app["url_generator"]->generate("accueil"));
 	}
 
+    public function coordonnees(Application $app)
+    {
+        $this->usermodel = new UserModel($app);
+        $user_id =$app['session']->get('user_id');
+//        var_dump($user_id);die();
+        $users = $this->usermodel->coord($user_id);
+        return $app["twig"]->render('backOff\showcoord.html.twig',['data'=>$users]);
+    }
+
 	public function connect(Application $app) {
 		$controllers = $app['controllers_factory'];
 		$controllers->match('/', 'App\Controller\UserController::index')->bind('user.index');
@@ -128,6 +139,7 @@ class UserController implements ControllerProviderInterface {
         $controllers->get('/register', 'App\Controller\UserController::registerUser')->bind('user.register');
 
         $controllers->get('/show', 'App\Controller\UserController::show')->bind('user.show');
+        $controllers->get('/coord', 'App\Controller\UserController::coordonnees')->bind('user.coord');
 
 		return $controllers;
 	}

@@ -32,7 +32,7 @@
 					<td>{{produit.libelle}}</td>
 					<td>EUR {{produit.prix}}</td>
 					{#<td>{{produit.photo}}</td>#}
-					<td><img style="width:100px;height:100px" src="{{asset('images/')}}{{produit.photo}}" alt="image de {{produit.libelle}}" ></td>
+					<td><img style="height:120px" src="{{asset('images/')}}{{produit.photo}}" alt="image de {{produit.libelle}}" ></td>
 
 					{% if  app.session.get('roles') == 'ROLE_ADMIN' %}
 						<td>

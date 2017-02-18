@@ -8,10 +8,15 @@
             <thead>
 
             <tr>
-                <th>CommandeId</th>
-                <th>Total</th>
+                <th>Commande Id</th>
+                <th>User Id</th>
+                <th>Username</th>
+                <th>Prix</th>
                 <th>Date Achat</th>
                 <th>Status</th>
+                {% if app.session.get('roles')=='ROLE_ADMIN' %}
+                <th>Detail</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -19,9 +24,15 @@
             {% for commande in data if data is not empty %}
                 <tr>
                     <td>{{commande.id}}</td>
+                    <td>{{commande.user_id}}</td>
+                    <td>{{commande.username}}</td>
                     <td>EUR {{commande.prix}}</td>
                     <td>{{commande.date_achat}}</td>
                     <td>{{commande.libelle}}</td>
+
+                    {% if app.session.get('roles')=='ROLE_ADMIN' %}
+                        <td><a href="{{ path('commande.detail', {id: commande.id}) }}"><img style="width:50px;height:50px" src="{{asset('images/icon.png')}}"></a></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             <tbody>

@@ -45,13 +45,13 @@
                 {% endfor %}
                 <th rowspan="4">Passer Commande </th>
 
-                {#<form method="post" action="{{ path('commande.add') }}">#}
-                    {#<th rowspan="4">input type="image" name="submit" src="{{asset('images/addCommande2.jpeg')}}" border="0" alt="Submit" placeholder="Click me" /></th>#}
-                    <th rowspan="4"><a href="{{path('commande.add')}}"><img style="width:80px;height:80px" src="{{asset('images/addCommande2.jpeg')}}"></a></th>
-                {#</form>#}
+                    {% if data is not empty  %}
+                        <th rowspan="4"><a href="{{path('commande.add')}}"><img style="width:80px;height:80px" src="{{asset('images/addCommande2.jpeg')}}"></a></th>
+                    {% else %}
+                        <th rowspan="4"><a href="#"><img style="width:115px;height:80px" src="{{asset('images/empty_cart.jpeg')}}" ></a></th>
+                    {% endif %}
 
-                {#<th rowspan="4"><a href="{{path('commande.add')}}"><img style="width:80px;height:80px" src="{{asset('images/addCommande2.jpeg')}}"></a></th>#}
-            </tr>
+                </tr>
         </table>
         </div>
     </div>

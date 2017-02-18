@@ -92,6 +92,7 @@ img {
   -moz-osx-font-smoothing: grayscale; }
 
 img {
+  height: auto !important;
   display: inline-block;
   vertical-align: middle; }
 
@@ -6188,4 +6189,7 @@ th.hide-for-touch {
     display: table-cell !important; }
 
   th.show-for-print {
-    display: table-cell !important; } }
+    display: table-cell !important; }
+.avatar {
+  margin: 10px 0 20px 0;
+}}

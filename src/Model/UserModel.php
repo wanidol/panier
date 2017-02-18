@@ -16,7 +16,7 @@ class UserModel {
 
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
-            ->select('id', 'username', 'motdepasse', 'roles', 'email','isEnabled')
+            ->select('id', 'username', 'motdepasse','password', 'roles', 'email','isEnabled')
             ->from('users')
             ->addOrderBy('id', 'ASC');
         return $queryBuilder->execute()->fetchAll();
@@ -25,14 +25,24 @@ class UserModel {
 
 	public function verif_login_mdp_Utilisateur($login,$mdp){
 		$sql = "SELECT id,username,motdepasse,roles FROM users WHERE username = ? AND motdepasse = ?";
-		$res=$this->db->executeQuery($sql,[$login,$mdp]);   //md5($mdp);
+		$res=$this->db->executeQuery($sql,[$login,md5($mdp)]);   //md5($mdp);
 		if($res->rowCount()==1)
 			return $res->fetch();
 		else
 			return false;
 	}
 
+    public function coord($id){
 
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('*')
+            ->from('users')
+            ->where('id = :idUser')
+            ->setParameter('idUser', $id);
+        return $queryBuilder->execute()->fetch();
+
+    }
 
     public function addUser($donnees)
     {
@@ -41,11 +51,13 @@ class UserModel {
             ->values([
                 'username' => '?',
                 'motdepasse' => '?',
+                'password' => '?',
                 'roles' => '?',
                 'email' => '?',
                 'isEnabled' => '?'
             ])
             ->setParameter(0, $donnees['username'])
+            ->setParameter(1, md5($donnees['motdepasse']))
             ->setParameter(1, $donnees['motdepasse'])
             ->setParameter(2, 'ROLE_CLIENT')
             ->setParameter(3, $donnees['email'])

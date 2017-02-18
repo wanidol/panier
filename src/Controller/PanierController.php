@@ -30,11 +30,16 @@ class PanierController implements ControllerProviderInterface
         return $this->show($app);
     }
 
+    public function panierIsEmpty(Application $app){
+
+        return $app["twig"]->render('frontOff/Panier/empty.html.twig');
+    }
+
 
     public function show(Application $app) {
         $this->panierModel = new PanierModel($app);
         $panier = $this->panierModel->getAllPanier();
-        return $app["twig"]->render('backOff/Panier/show.html.twig',['data'=>$panier]);
+        return $app["twig"]->render('frontOff/Panier/show.html.twig',['data'=>$panier]);
     }
 
     public function showVotrePanier(Application $app){
@@ -42,9 +47,18 @@ class PanierController implements ControllerProviderInterface
         $this->panierModel = new PanierModel($app);
         $client_id =$app['session']->get('user_id');
         $panier_total = $this->panierModel->GetTotal($client_id);
+//        $sum = $this->panierModel->GetSumPrix($client_id);
+//      var_dump(is_null($sum['total']));die();
         $panier = $this->panierModel->getPanierByUser($client_id);
-        return $app["twig"]->render('frontOff/Panier/show.html.twig',['data'=>$panier,'panier_total'=>$panier_total]);
 
+//        if (empty($sum['total'])){
+
+//            return $app->redirect($app["url_generator"]->generate("panier.panierIsEmpty"));
+//        }
+//        else{
+            return $app["twig"]->render('frontOff/Panier/show.html.twig', ['data' => $panier, 'panier_total' => $panier_total]);
+
+//        }
     }
 
     public function delete(Application $app, $id) {
@@ -90,25 +104,6 @@ class PanierController implements ControllerProviderInterface
         return $app->redirect($app["url_generator"]->generate("panier.showVotrePanier"));
  }
 
-//    public function showByUser(Application $app) {
-//        $user_id = $app['session']->get('user_id');
-//        $this->commandeModel = new CommandModel($app);
-//        $commandeModel = $this->commandeModel->getCommandByUser($user_id);
-////var_dump($commandeModel);die();
-//        return $app["twig"]->render('backOff/Commande/show.html.twig',['data'=>$commandeModel]);
-//
-//    }
-//
-//    public function Adminshow(Application $app) {
-//
-//        $this->panierModel = new CommandModel($app);
-//
-////        $this->commandeModel = new CommandModel($app);
-//
-//        $commandeModel = $this->panierModel->getAllCommand();
-////        var_dump($commandeModel);die();
-//        return $app["twig"]->render('backOff/Commande/show.html.twig',['data'=>$commandeModel]);
-//    }
 
     public function connect(Application $app) {
 
@@ -116,7 +111,7 @@ class PanierController implements ControllerProviderInterface
 
         $controllers->get('/', 'App\Controller\panierController::index')->bind('panier.index');
         $controllers->get('/show', 'App\Controller\panierController::show')->bind('panier.show');
-        $controllers->get('/supp', 'App\Controller\panierController::show')->bind('panier.supp');
+        $controllers->get('/show', 'App\Controller\panierController::panierIsEmpty')->bind('panier.panierIsEmpty');
 
         $controllers->get('/delete/{id}', 'App\Controller\panierController::delete')->bind('panier.delete')->assert('id', '\d+');
         $controllers->delete('/delete', 'App\Controller\panierController::validFormDelete')->bind('panier.validFormDelete');
@@ -126,8 +121,6 @@ class PanierController implements ControllerProviderInterface
 
         $controllers->get('/detailByUser', 'App\Controller\panierController::showVotrePanier')->bind('panier.showVotrePanier');
 
-//        $controllers->get('/showCommande', 'App\Controller\panierController::showByUser')->bind('commande.myshow');
-//        $controllers->get('/showCommande', 'App\Controller\panierController::Adminshow')->bind('commande.adminshow');
 
         return $controllers;
     }
